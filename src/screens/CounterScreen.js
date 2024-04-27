@@ -7,7 +7,7 @@ import {decrement, increment} from '../redux/features/CounterSlice';
 const CounterScreen = () => {
   // hooks
   const dispatch = useDispatch();
-  const count = useSelector(state => state.counter.Value);
+  const count = useSelector(state => state.counter.Value); // props:is used for data passing,
   console.log('CounterScreen count:', count);
   return (
     <View style={styles.container}>

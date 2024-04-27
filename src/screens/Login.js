@@ -1,19 +1,26 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import MyButton from '../components/MyButton';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../redux/features/AuthSlice';
 
 const Login = () => {
   // states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // hooks
+  const dispatch = useDispatch();
+  const {userData, isLoading} = useSelector(state => state.auth);
+
   // functions
   const handlingLogin = () => {
     const params = {
-      username: '',
-      password: '',
+      username: email,
+      password: password,
     };
     console.log('params:', params);
+    dispatch(login(params));
   };
   return (
     <View style={styles.container}>
@@ -33,7 +40,7 @@ const Login = () => {
         style={styles.input}
         placeholderTextColor="grey"
       />
-      <MyButton title="Login" onPress={handlingLogin} />
+      <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
     </View>
   );
 };

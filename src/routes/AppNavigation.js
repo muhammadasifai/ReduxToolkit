@@ -7,11 +7,14 @@ import TabNavigation from './TabNavigation';
 import CounterScreen from '../screens/CounterScreen';
 import CartScreen from '../screens/CartScreen';
 import SingleProduct from '../screens/SingleProduct';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
-  const userData = false;
+  // const userData = false;
+  const {userData} = useSelector(state => state.auth);
+  console.log('userData', userData);
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -23,8 +26,8 @@ const AppNavigation = () => {
           </Stack.Group>
         ) : (
           <Stack.Group>
-            <Stack.Screen name="CounterScreen" component={CounterScreen} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="CounterScreen" component={CounterScreen} />
           </Stack.Group>
         )}
       </Stack.Navigator>
