@@ -7,6 +7,22 @@ const initialState = {
   isSuccess: false,
   isError: false,
 };
+
+// signUp function
+export const signUp = createAsyncThunk('signUp', async(params, thunkApi) => {
+  console.params('params', params)
+  try {
+    const response = await API.post('auth/signUp', params)
+    console.log('respones', response)
+    return response.data;
+  } catch (error) {
+    console.log('error', error);
+    return thunkApi.rejectWithValue(error)
+  }
+})
+
+
+// login function
 // createAsyncThunk:  for data handling
 export const login = createAsyncThunk('login', async (params, thunkApi) => {
   console.log('params', params);
@@ -26,6 +42,19 @@ const AuthSlice = createSlice({
   reducer: {},
   extraReducers: builder => {
     //extraReducers for response in API us kay data ki handling kay leyee use krtay hay.
+    // signUp cases 
+    builder.addCase(signUp.pending, state => {
+      state.isLoading = true;
+    }) 
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.userData = action.payload;
+    })
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+    })
     // login Cases
     builder.addCase(login.pending, state => {
       state.isLoading = true;
