@@ -12,7 +12,7 @@ const initialState = {
 export const signUp = createAsyncThunk('signUp', async(params, thunkApi) => {
   console.params('params', params)
   try {
-    const response = await API.post('auth/signUp', params)
+    const response = await API.post('user/signup', params)
     console.log('respones', response)
     return response.data;
   } catch (error) {
@@ -27,7 +27,7 @@ export const signUp = createAsyncThunk('signUp', async(params, thunkApi) => {
 export const login = createAsyncThunk('login', async (params, thunkApi) => {
   console.log('params', params);
   try {
-    const response = await API.post('auth/login', params); // diff b/t params and params:
+    const response = await API.post('user/login', params); // diff b/t params and params:
     console.log('params', response);
     return response.data;
   } catch (error) {

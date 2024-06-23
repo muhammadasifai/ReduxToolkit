@@ -8,6 +8,7 @@ import CounterScreen from '../screens/CounterScreen';
 import CartScreen from '../screens/CartScreen';
 import SingleProduct from '../screens/SingleProduct';
 import {useSelector} from 'react-redux';
+import SignUp from '../screens/SignUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const AppNavigation = () => {
           </Stack.Group>
         ) : (
           <Stack.Group>
+            <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="CounterScreen" component={CounterScreen} />
           </Stack.Group>
