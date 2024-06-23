@@ -1,7 +1,17 @@
-import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import MyButton from '../components/MyButton';
+import {logout} from '../redux/features/AuthSlice';
 
 const Home = () => {
   // hooks
@@ -85,23 +95,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={products?.products}
-        renderItem={({item, index}) => {
-          return (
-            <Pressable
-              onPress={() => navigate('SingleProduct', {Product: item})}
-              style={styles.cardBox}
-              key={item.id}>
-              <Image source={{uri: item.thumbnail}} style={styles.img} />
-              <View style={styles.footer}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>${item.price}</Text>
-              </View>
-            </Pressable>
-          );
-        }}
-      />
+      <MyButton title={'logout'} onPress={() => dispatch(logout())} />
     </View>
   );
 };
