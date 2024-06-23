@@ -1,8 +1,8 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import MyButton from '../components/MyButton';
 import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../redux/features/AuthSlice';
+import {login, resetErrorMessage} from '../redux/features/AuthSlice';
 
 const Login = () => {
   // states
@@ -11,17 +11,28 @@ const Login = () => {
 
   // hooks
   const dispatch = useDispatch();
-  const {userData, isLoading} = useSelector(state => state.auth);
+  const {userData, isLoading, errorMessage} = useSelector(state => state.auth);
+  console.debug('login - errorMessage:', errorMessage)
 
   // functions
   const handlingLogin = () => {
     const params = {
-      username: email,
-      password: password,
+      email: 'muhammad@gmail.com',
+      password: 'abac',
     };
     console.log('params:', params);
+    if (errorMessage) {
+      dispatch(resetErrorMessage())
+    }
     dispatch(login(params));
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      Alert.alert(errorMessage)
+    }
+  }, [errorMessage])
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>

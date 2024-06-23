@@ -27,8 +27,8 @@ const AppNavigation = () => {
           </Stack.Group>
         ) : (
           <Stack.Group>
-            <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="CounterScreen" component={CounterScreen} />
           </Stack.Group>
         )}
