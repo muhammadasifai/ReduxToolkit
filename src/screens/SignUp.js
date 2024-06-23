@@ -69,7 +69,7 @@ const SignUp = () => {
         style={styles.input}
         placeholderTextColor="grey"
       />
-      <MyButton isLoading={isLoading} title="Login" onPress={handlingSignUp} />
+      <MyButton isLoading={isLoading} title="SignUp" onPress={handlingSignUp} />
     </View>
   );
 };
